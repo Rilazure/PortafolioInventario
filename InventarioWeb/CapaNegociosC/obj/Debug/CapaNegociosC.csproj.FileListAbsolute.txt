@@ -1,0 +1,7 @@
+C:\Users\Ricar\Source\Repos\PortafolioInventario\InventarioWeb\CapaNegociosC\bin\Debug\CapaNegociosC.dll
+C:\Users\Ricar\Source\Repos\PortafolioInventario\InventarioWeb\CapaNegociosC\bin\Debug\CapaNegociosC.pdb
+C:\Users\Ricar\Source\Repos\PortafolioInventario\InventarioWeb\CapaNegociosC\bin\Debug\CapaDeDatos.dll
+C:\Users\Ricar\Source\Repos\PortafolioInventario\InventarioWeb\CapaNegociosC\bin\Debug\CapaDeDatos.pdb
+C:\Users\Ricar\Source\Repos\PortafolioInventario\InventarioWeb\CapaNegociosC\obj\Debug\CapaNegociosC.csprojResolveAssemblyReference.cache
+C:\Users\Ricar\Source\Repos\PortafolioInventario\InventarioWeb\CapaNegociosC\obj\Debug\CapaNegociosC.dll
+C:\Users\Ricar\Source\Repos\PortafolioInventario\InventarioWeb\CapaNegociosC\obj\Debug\CapaNegociosC.pdb
