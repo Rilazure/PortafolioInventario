@@ -33,6 +33,26 @@ namespace CapaDeDatos
 
         #endregion
         #region Insertar Datos
+        //Este metodo es para el Login seguridad.
+        public void CrearUsuario(string nombreUsuario,string PasswordU)
+        {
+            using (SqlConnection cx = new SqlConnection(Conexion))
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("Insert into Login Values @NombreUsuario,@PasswordU");
+                    cx.Open();
+                    cmd.Parameters.AddWithValue("@nombreUsuario", nombreUsuario);
+                    cmd.Parameters.AddWithValue("@PasswordU", PasswordU);
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+        }
+
         public void CrearAlmacenista(string Nombre, int Cedula)
         {
             using (SqlConnection cx = new SqlConnection(Conexion))
@@ -108,6 +128,7 @@ namespace CapaDeDatos
                 cmd.Parameters.AddWithValue("@Fk_Prestamo", fk_Prestamo);
             }
         }
+
         #endregion
         #region Obtener Datos
         // aqui devo consultar articulos disponibles
@@ -123,10 +144,9 @@ namespace CapaDeDatos
         public DataTable Info()
         {
             using (SqlConnection cx = new SqlConnection(Conexion))
-            {
-                //SqlCommand cmd = new SqlCommand("select * from Employee", cx);
-                //SqlCommand cmd = new SqlCommand("select IdEstado,Estado,IdDispo,Diponibilidad,IdCategoria,Categoria from Estado E join Disponibilidad D on E.IdEstado = D.IdDispo join Categoria C  on E.IdEstado = C.IdCategoria", cx);
-                SqlDataAdapter DA = new SqlDataAdapter("select * from Employee", cx);
+            {              
+                //COn esta consulta puedo llenar los drl    
+              SqlDataAdapter DA = new SqlDataAdapter("select IdEstado,Estado,IdDispo,Diponibilidad,IdCategoria,Categoria from Estado E join Disponibilidad D on E.IdEstado = D.IdDispo join Categoria C  on E.IdEstado = C.IdCategoria", cx);              
                 DataSet dt = new DataSet();
                 DA.Fill(dt);                                
                 Cantidad = dt.Tables[0].Rows.Count;
