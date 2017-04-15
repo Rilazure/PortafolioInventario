@@ -24,6 +24,8 @@ namespace CapaDeDatos
         public int Fk_Categoria { get; set; }
         public DateTime FechaPrestamo { get; set; }
         public DateTime FechaDevolucion { get; set; }
+        public string Llenar { get; set; }
+        public int Cantidad { get; set; }
 
         #endregion
         #region Conexion Base de datos
@@ -42,7 +44,7 @@ namespace CapaDeDatos
                 cmd.ExecuteNonQuery();
             }
         }
-        public void IngresarArticulo(DateTime FechaIngreso,int Fk_Almacenista)
+        public void IngresarArticulo(DateTime FechaIngreso, int Fk_Almacenista)
         {
             using (SqlConnection Cx = new SqlConnection(Conexion))
             {
@@ -53,7 +55,7 @@ namespace CapaDeDatos
                 cmd.ExecuteNonQuery();
             }
         }
-        public void CrearSolicitante(string Nombre,int Cedula)
+        public void CrearSolicitante(string Nombre, int Cedula)
         {
             using (SqlConnection cx = new SqlConnection(Conexion))
             {
@@ -62,15 +64,15 @@ namespace CapaDeDatos
                 cmd.Parameters.AddWithValue("@Nombre", Nombre);
                 cmd.Parameters.AddWithValue("@Cedula", Cedula);
                 cmd.ExecuteNonQuery();
-            }            
+            }
         }
-        public void CrearPrestamo(int fk_Almacenista,int fk_Solicitante,int fk_IngresoArticulo,int fk_Estado, int fk_Disponibilidad,int fk_Categoria, DateTime fechaPrestamo)
+        public void CrearPrestamo(int fk_Almacenista, int fk_Solicitante, int fk_IngresoArticulo, int fk_Estado, int fk_Disponibilidad, int fk_Categoria, DateTime fechaPrestamo)
         {
             using (SqlConnection cx = new SqlConnection(Conexion))
             {
                 SqlCommand cmd = new SqlCommand("Insert into Prestamo (Fk_Almacenista,Fk_Solicitante,Fk_IngresoArticulo,Fk_Estado,Fk_Disponibilidad,Fk_Categoria,FechaPrestamo) values @Fk_Almacenista,@Fk_Solicitante,@Fk_IngresoArticulo,@Fk_Estado,@Fk_Disponibilidad,@Fk_Categoria,@FechaPrestamo");
                 cx.Open();
-                cmd.Parameters.AddWithValue("@Fk_Almacenista",fk_Almacenista);
+                cmd.Parameters.AddWithValue("@Fk_Almacenista", fk_Almacenista);
                 cmd.Parameters.AddWithValue("@Fk_Solicitante", fk_Solicitante);
                 cmd.Parameters.AddWithValue("@Fk_IngresoArticulo", fk_IngresoArticulo);
                 cmd.Parameters.AddWithValue("@Fk_Estado", fk_Estado);
@@ -80,13 +82,13 @@ namespace CapaDeDatos
                 cmd.ExecuteNonQuery();
             }
         }
-        public void ActualizarPrestamo(int IdPrestamo, int fk_Almacenista, int fk_Solicitante, int fk_IngresoArticulo, int fk_Estado, int fk_Disponibilidad, int fk_Categoria,  DateTime fechaDevolucion)
+        public void ActualizarPrestamo(int IdPrestamo, int fk_Almacenista, int fk_Solicitante, int fk_IngresoArticulo, int fk_Estado, int fk_Disponibilidad, int fk_Categoria, DateTime fechaDevolucion)
         {
             using (SqlConnection cx = new SqlConnection(Conexion))
             {
                 SqlCommand cmd = new SqlCommand("Update Prestamo set Fk_Estado = @Fk_Estado,Fk_Disponibilidad = @Fk_Disponibilidad,fechaDevolucion = @fechaDevolucion where IdPrestamo = @IdPrestamo ");
                 cx.Open();
-                cmd.Parameters.AddWithValue("@Fk_Estado",fk_Estado);
+                cmd.Parameters.AddWithValue("@Fk_Estado", fk_Estado);
                 // aqui es importante camviar el la diponbilidad directamente para que quede disponible automaticamente en vez del parametro quemo el dato
                 // debo actualizar la cantidad cada vez q presto y cada vez q devuelvo
                 cmd.Parameters.AddWithValue("@Fk_Disponibilidad", fk_Disponibilidad);
@@ -95,13 +97,13 @@ namespace CapaDeDatos
                 cmd.ExecuteNonQuery();
             }
         }
-        public void ActualizarHistorial(DateTime FechaGestion,string Observaciones, int fk_Prestamo)
+        public void ActualizarHistorial(DateTime FechaGestion, string Observaciones, int fk_Prestamo)
         {
             using (SqlConnection cx = new SqlConnection(Conexion))
             {
                 SqlCommand cmd = new SqlCommand("Insert into HistorialArticulo values @FechaGestion,@Observaciones,@Fk_Prestamo");
                 cx.Open();
-                cmd.Parameters.AddWithValue("@FechaGestion",FechaGestion);
+                cmd.Parameters.AddWithValue("@FechaGestion", FechaGestion);
                 cmd.Parameters.AddWithValue("@Observaciones", Observaciones);
                 cmd.Parameters.AddWithValue("@Fk_Prestamo", fk_Prestamo);
             }
@@ -120,15 +122,20 @@ namespace CapaDeDatos
         //Estos datos son para llenar DropDownList
         public DataTable Info()
         {
-            
-            using (SqlDataAdapter DA = new SqlDataAdapter("select IdEstado,Estado,IdDispo,Diponibilidad,IdCategoria,Categoria from Estado E join Disponibilidad D on E.IdEstado = D.IdDispo join Categoria C  on E.IdEstado = C.IdCategoria", Conexion))
+            using (SqlConnection cx = new SqlConnection(Conexion))
             {
+                //SqlCommand cmd = new SqlCommand("select * from Employee", cx);
+                //SqlCommand cmd = new SqlCommand("select IdEstado,Estado,IdDispo,Diponibilidad,IdCategoria,Categoria from Estado E join Disponibilidad D on E.IdEstado = D.IdDispo join Categoria C  on E.IdEstado = C.IdCategoria", cx);
+                SqlDataAdapter DA = new SqlDataAdapter("select * from Employee", cx);
                 DataSet dt = new DataSet();
-                DA.Fill(dt);
+                DA.Fill(dt);                                
+                Cantidad = dt.Tables[0].Rows.Count;
                 return dt.Tables[0];
-            }            
-            
+            }
         }
+
+        #endregion
+        #region Datos Importantes para los drl Items.Insert(0,"-Seleccione-")
 
         #endregion
     }

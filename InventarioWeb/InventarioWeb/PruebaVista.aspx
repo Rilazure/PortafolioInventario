@@ -9,7 +9,11 @@
 <body>
     <form id="form1" runat="server">
         <div>
+            <asp:DropDownList ID="Ddrl_Dato1" runat="server"></asp:DropDownList>
+             <asp:DropDownList ID="Drl_Dato2" runat="server"></asp:DropDownList>
             <asp:GridView ID="Gv_Datos" runat="server"></asp:GridView>
+
+            
         </div>
     </form>
 </body>

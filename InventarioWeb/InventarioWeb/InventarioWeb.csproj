@@ -88,6 +88,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CapaDeDatos\CapaDeDatos.csproj">
+      <Project>{43F4F31F-9C7B-4255-B025-A2AA38713A4A}</Project>
+      <Name>CapaDeDatos</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CapaNegociosC\CapaNegociosC.csproj">
       <Project>{ec0e31a7-7eef-4d93-a205-7c09c0517f21}</Project>
       <Name>CapaNegociosC</Name>
