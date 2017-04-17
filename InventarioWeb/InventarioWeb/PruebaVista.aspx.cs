@@ -12,8 +12,7 @@ namespace InventarioWeb
     public partial class PruebaVista : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
-        {
-            CapaConexion d = new CapaConexion();
+        {            
             ClaseNegocios Nego = new ClaseNegocios();
             if (!IsPostBack)
             {

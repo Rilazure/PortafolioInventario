@@ -26,7 +26,7 @@ namespace CapaDeDatos
         public DateTime FechaDevolucion { get; set; }
         public string Llenar { get; set; }
         public int Cantidad { get; set; }
-
+        public string Referencia { get; set; }
         #endregion
         #region Conexion Base de datos
         string Conexion = ConfigurationManager.ConnectionStrings["DBZ"].ConnectionString;
@@ -64,18 +64,20 @@ namespace CapaDeDatos
                 cmd.ExecuteNonQuery();
             }
         }
-        public void IngresarArticulo(DateTime FechaIngreso, int Fk_Almacenista)
+        public void IngresarArticulo(DateTime FechaIngreso, int Fk_Almacenista, string NombreA)
         {
             using (SqlConnection Cx = new SqlConnection(Conexion))
             {
-                SqlCommand cmd = new SqlCommand("INSERT INTO IngresoArticulo values @fechaIngreso,@Fk_Almacenista");
+                SqlCommand cmd = new SqlCommand("INSERT INTO IngresoArticulo values @fechaIngreso,@Fk_Almacenista,@NombreA,@Referencia");
                 Cx.Open();
                 cmd.Parameters.AddWithValue("@fechaIngreso", FechaIngreso);
                 cmd.Parameters.AddWithValue("@Fk_Almacenista", Fk_Almacenista);
+                cmd.Parameters.AddWithValue("@NombreA", NombreA);
+                cmd.Parameters.AddWithValue("@Referencia", Referencia);
                 cmd.ExecuteNonQuery();
             }
         }
-        public void CrearSolicitante(string Nombre, int Cedula)
+        public void CrearPersonaSolicitante(string Nombre, int Cedula)
         {
             using (SqlConnection cx = new SqlConnection(Conexion))
             {
@@ -160,3 +162,4 @@ namespace CapaDeDatos
         #endregion
     }
 }
+                      
