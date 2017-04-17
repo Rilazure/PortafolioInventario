@@ -34,7 +34,7 @@ namespace CapaDeDatos
         #endregion
         #region Insertar Datos
         //Este metodo es para el Login seguridad.
-        public void CrearUsuario(string nombreUsuario,string PasswordU)
+        public void CrearUsuario(string NombreUsuario,string PasswordU)
         {
             using (SqlConnection cx = new SqlConnection(Conexion))
             {
@@ -42,7 +42,7 @@ namespace CapaDeDatos
                 {
                     SqlCommand cmd = new SqlCommand("Insert into Login Values @NombreUsuario,@PasswordU");
                     cx.Open();
-                    cmd.Parameters.AddWithValue("@nombreUsuario", nombreUsuario);
+                    cmd.Parameters.AddWithValue("@NombreUsuario", NombreUsuario);
                     cmd.Parameters.AddWithValue("@PasswordU", PasswordU);
                     cmd.ExecuteNonQuery();
                 }
@@ -52,7 +52,6 @@ namespace CapaDeDatos
                 }
             }
         }
-
         public void CrearAlmacenista(string Nombre, int Cedula)
         {
             using (SqlConnection cx = new SqlConnection(Conexion))
@@ -130,7 +129,6 @@ namespace CapaDeDatos
                 cmd.Parameters.AddWithValue("@Fk_Prestamo", fk_Prestamo);
             }
         }
-
         #endregion
         #region Obtener Datos
         // aqui devo consultar articulos disponibles

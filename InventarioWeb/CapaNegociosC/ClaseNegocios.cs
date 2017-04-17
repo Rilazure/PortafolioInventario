@@ -18,7 +18,10 @@ namespace CapaNegociosC
         }
         #endregion
         #region Metodos ingreso datos        
-
+        public void CrearUsuario(string NombreUsuario,string PasswordU )
+        {
+            Cx.CrearUsuario(NombreUsuario, PasswordU);
+        }
         public void CrearAlmcenista(string Nombre, int Cedula)
         {
             Cx.CrearAlmacenista(Nombre, Cedula);
