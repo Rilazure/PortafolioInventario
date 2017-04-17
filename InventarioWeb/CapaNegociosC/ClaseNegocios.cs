@@ -22,6 +22,12 @@ namespace CapaNegociosC
         {
             Cx.CrearUsuario(NombreUsuario, PasswordU);
         }
+        public DataTable VerificarLogin(string PassWordU)
+        {
+            return Cx.VerificarLogin(PassWordU);
+        }
+
+
         public void CrearAlmcenista(string Nombre, int Cedula)
         {
             Cx.CrearAlmacenista(Nombre, Cedula);

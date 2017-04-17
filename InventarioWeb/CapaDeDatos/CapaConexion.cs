@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Security;
 
 namespace CapaDeDatos
 {
@@ -34,17 +35,44 @@ namespace CapaDeDatos
         #endregion
         #region Insertar Datos
         //Este metodo es para el Login seguridad.
-        public void CrearUsuario(string NombreUsuario,string PasswordU)
+        public void CrearUsuario(string NombreUsuario, string PasswordU)
         {
             using (SqlConnection cx = new SqlConnection(Conexion))
             {
                 try
                 {
-                    SqlCommand cmd = new SqlCommand("Insert into Login Values @NombreUsuario,@PasswordU");
-                    cx.Open();
-                    cmd.Parameters.AddWithValue("@NombreUsuario", NombreUsuario);
-                    cmd.Parameters.AddWithValue("@PasswordU", PasswordU);
+                    SqlCommand cmd = new SqlCommand("Select * from Login where @PassWordU)", cx);
+                    //SqlDataAdapter da = new SqlDataAdapter("Select * from Login where @NombreUsuario", NombreUsuario);
+                    string PasswordEncriptado = FormsAuthentication.HashPasswordForStoringInConfigFile(PasswordU, "SHA1");
+                    cx.Open();                   
+                    cmd.Parameters.AddWithValue("@NombreUsuario", NombreUsuario);                    
+                    cmd.Parameters.AddWithValue("@PassWordU", PasswordEncriptado);                   
+                    
+                    if (ReturnCode.Equals(1))
+                    {
+                        SqlCommand cmd1 = new SqlCommand("Insert into Login Values (@NombreUsuario, @PassWordU)", cx);
+                        cmd1.Parameters.AddWithValue("@NombreUsuario", NombreUsuario);
+                        cmd1.Parameters.AddWithValue("@PassWordU", PasswordEncriptado);
+                        cmd1.ExecuteNonQuery();
+                    }
+
                     cmd.ExecuteNonQuery();
+
+
+
+
+
+                    //DataSet dt = new DataSet();
+                    //da.Fill(dt);
+                    //int count = (int)(dt.Tables.Count);
+                    //if (count == 1)
+                    //{
+                    //    throw new Exception("Ya existe");
+                    //}
+                    //else
+                    //{
+                    //    throw new Exception("No existe");                   }
+                    //}                    
                 }
                 catch (Exception ex)
                 {
@@ -52,6 +80,26 @@ namespace CapaDeDatos
                 }
             }
         }
+        //aqui creo q puedo hacer poliformismo o sobre carga de metodos
+        public DataTable VerificarLogin(string PasswordU)
+        {
+            using (SqlConnection cx = new SqlConnection(Conexion))
+            {
+                SqlCommand cmd = new SqlCommand("select * from Login where PassWordU = @PassWordU ", cx);
+                string PasswordEncriptado = FormsAuthentication.HashPasswordForStoringInConfigFile(PasswordU, "SHA1");
+                cx.Open();
+                cmd.Parameters.AddWithValue("@PassWordU", PasswordEncriptado);
+                cmd.ExecuteNonQuery();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataSet dt = new DataSet();
+                da.Fill(dt);
+                Cantidad = dt.Tables.Count;
+                return dt.Tables[0];
+            }
+        }
+
+
+
         public void CrearAlmacenista(string Nombre, int Cedula)
         {
             using (SqlConnection cx = new SqlConnection(Conexion))
@@ -144,11 +192,11 @@ namespace CapaDeDatos
         public DataTable Info()
         {
             using (SqlConnection cx = new SqlConnection(Conexion))
-            {              
+            {
                 //COn esta consulta puedo llenar los drl    
-              SqlDataAdapter DA = new SqlDataAdapter("select IdEstado,Estado,IdDispo,Diponibilidad,IdCategoria,Categoria from Estado E join Disponibilidad D on E.IdEstado = D.IdDispo join Categoria C  on E.IdEstado = C.IdCategoria", cx);              
+                SqlDataAdapter DA = new SqlDataAdapter("select IdEstado,Estado,IdDispo,Diponibilidad,IdCategoria,Categoria from Estado E join Disponibilidad D on E.IdEstado = D.IdDispo join Categoria C  on E.IdEstado = C.IdCategoria", cx);
                 DataSet dt = new DataSet();
-                DA.Fill(dt);                                
+                DA.Fill(dt);
                 Cantidad = dt.Tables[0].Rows.Count;
                 return dt.Tables[0];
             }
@@ -160,4 +208,3 @@ namespace CapaDeDatos
         #endregion
     }
 }
-                      
