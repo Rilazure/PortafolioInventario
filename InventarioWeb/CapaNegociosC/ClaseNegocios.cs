@@ -18,9 +18,10 @@ namespace CapaNegociosC
         }
         #endregion
         #region Metodos ingreso datos        
-        public void CrearUsuario(string NombreUsuario,string PasswordU )
+        public string CrearUsuario(string NombreUsuario,string PasswordU)
         {
             Cx.CrearUsuario(NombreUsuario, PasswordU);
+            return Cx.Mensaje;
         }
         public DataTable VerificarLogin(string PassWordU)
         {

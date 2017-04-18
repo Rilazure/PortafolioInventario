@@ -1,4 +1,5 @@
-﻿using CapaNegociosC;
+﻿using CapaDeDatos;
+using CapaNegociosC;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,7 @@ namespace InventarioWeb.RegistroUsuario
 {
     public partial class Registro : System.Web.UI.Page
     {
+        CapaConexion cx = new CapaConexion();
         ClaseNegocios Cn = new ClaseNegocios();
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -18,6 +20,9 @@ namespace InventarioWeb.RegistroUsuario
         protected void BtnGuardar_Click(object sender, EventArgs e)
         {
             Cn.CrearUsuario(TxtNombre.Text, TxtPassword.Text);
+            
+              
+            
         }
     }
 }

@@ -19,6 +19,7 @@
             </div>
             <asp:Button Text="Guardar"  id="BtnGuardar" runat="server" OnClick="BtnGuardar_Click"/>
             <asp:Button ID="Button1" runat="server" Text="Button" />
+            <asp:Label ID="Mensaje" runat="server" ></asp:Label>
         </div>
     </form>
 </body>

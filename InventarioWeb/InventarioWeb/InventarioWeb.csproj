@@ -71,6 +71,7 @@
     <Content Include="EstiloWeb\bootstrap.min.js" />
     <Content Include="EstiloWeb\jquery-1.10.2.js" />
     <Content Include="EstiloWeb\jquery-1.10.2.min.js" />
+    <Content Include="IngresoElementos.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="packages.config" />
     <Content Include="RegistroUsuario\Registro.aspx" />
@@ -84,9 +85,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="PruebaVista.aspx" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IngresoElementos.aspx.cs">
+      <DependentUpon>IngresoElementos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="IngresoElementos.aspx.designer.cs">
+      <DependentUpon>IngresoElementos.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

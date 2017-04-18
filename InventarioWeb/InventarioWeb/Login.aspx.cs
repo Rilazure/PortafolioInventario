@@ -27,7 +27,7 @@ namespace InventarioWeb
             //Cn.CrearUsuario(TxtNombre.Text, TxtPassword.Text);
             if (dato == 1)
             {
-                Response.Redirect("RegistroUsuario/Registro.aspx");
+                Response.Redirect("~/IngresoElementos.aspx");
             }
             else
             {

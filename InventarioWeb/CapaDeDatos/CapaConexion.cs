@@ -27,6 +27,8 @@ namespace CapaDeDatos
         public DateTime FechaDevolucion { get; set; }
         public string Llenar { get; set; }
         public int Cantidad { get; set; }
+        public int Retorna { get; set; }
+        public string Mensaje { get; set; }
         public string Referencia { get; set; }
         #endregion
         #region Conexion Base de datos
@@ -35,45 +37,30 @@ namespace CapaDeDatos
         #endregion
         #region Insertar Datos
         //Este metodo es para el Login seguridad.
-        public void CrearUsuario(string NombreUsuario, string PasswordU)
+        public string CrearUsuario(string NombreUsuario, string PasswordU)
         {
             using (SqlConnection cx = new SqlConnection(Conexion))
             {
                 try
                 {
-                    SqlCommand cmd = new SqlCommand("Select * from Login where @PassWordU)", cx);
+                    SqlCommand cmd = new SqlCommand("spNew", cx);
+                    cmd.CommandType = CommandType.StoredProcedure;
                     //SqlDataAdapter da = new SqlDataAdapter("Select * from Login where @NombreUsuario", NombreUsuario);
                     string PasswordEncriptado = FormsAuthentication.HashPasswordForStoringInConfigFile(PasswordU, "SHA1");
-                    cx.Open();                   
-                    cmd.Parameters.AddWithValue("@NombreUsuario", NombreUsuario);                    
-                    cmd.Parameters.AddWithValue("@PassWordU", PasswordEncriptado);                   
-                    
-                    if (ReturnCode.Equals(1))
-                    {
-                        SqlCommand cmd1 = new SqlCommand("Insert into Login Values (@NombreUsuario, @PassWordU)", cx);
-                        cmd1.Parameters.AddWithValue("@NombreUsuario", NombreUsuario);
-                        cmd1.Parameters.AddWithValue("@PassWordU", PasswordEncriptado);
-                        cmd1.ExecuteNonQuery();
-                    }
-
+                    cx.Open();
+                    cmd.Parameters.AddWithValue("@NombreUsuario", NombreUsuario);
+                    cmd.Parameters.AddWithValue("@PassWordU", PasswordEncriptado);
                     cmd.ExecuteNonQuery();
-
-
-
-
-
-                    //DataSet dt = new DataSet();
-                    //da.Fill(dt);
-                    //int count = (int)(dt.Tables.Count);
-                    //if (count == 1)
-                    //{
-                    //    throw new Exception("Ya existe");
-                    //}
-                    //else
-                    //{
-                    //    throw new Exception("No existe");                   }
-                    //}                    
-                }
+                    Retorna =  (int)cmd.ExecuteScalar();
+                    if (Retorna == -1)
+                    {
+                        return Mensaje = "Ya existe";
+                    }
+                    else
+                    {
+                        return Mensaje = "No existe";
+                    }
+                        }
                 catch (Exception ex)
                 {
                     throw ex;
@@ -93,7 +80,7 @@ namespace CapaDeDatos
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 DataSet dt = new DataSet();
                 da.Fill(dt);
-                Cantidad = dt.Tables.Count;
+                //Cantidad = dt.Tables.Count;
                 return dt.Tables[0];
             }
         }
