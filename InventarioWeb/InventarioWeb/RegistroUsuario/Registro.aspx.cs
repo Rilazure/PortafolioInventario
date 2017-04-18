@@ -19,10 +19,17 @@ namespace InventarioWeb.RegistroUsuario
         }
         protected void BtnGuardar_Click(object sender, EventArgs e)
         {
-            Cn.CrearUsuario(TxtNombre.Text, TxtPassword.Text);
-            
-              
-            
+          CrearUsuario(TxtNombre.Text, TxtPassword.Text);
+            if (Mensaje.Text == "")
+            {
+                Response.Redirect("~/Login.aspx");
+            }
+        }
+        public string CrearUsuario(string nombre, string Pass)
+        {
+            Cn.CrearUsuario(nombre, Pass);
+            return Mensaje.Text = Cn.mensaje;
+           
         }
     }
 }

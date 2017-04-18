@@ -16,23 +16,23 @@ namespace InventarioWeb
         protected void Page_Load(object sender, EventArgs e)
         {
         }
-        
-     
-
         protected void BtnGuardar_Click(object sender, EventArgs e)
         {
-            Gv.DataSource = Cn.VerificarLogin(TxtPassword.Text);
-            Gv.DataBind();
-            int dato = Gv.Rows.Count;
-            //Cn.CrearUsuario(TxtNombre.Text, TxtPassword.Text);
-            if (dato == 1)
+            VerificarLogin(TxtNombre.Text, TxtPassword.Text);
+            if (Mensajes.Text == "")
             {
-                Response.Redirect("~/IngresoElementos.aspx");
+                Response.Write("si");
             }
             else
             {
-                Response.Write("No");
+                Response.Write("no");
             }
         }
+        public string VerificarLogin(string nombre,string Pass)
+        {
+            Cn.VerificarLogin(nombre, Pass);
+            return Mensajes.Text =  Cn.mensaje;
+        }       
     }
 }
+

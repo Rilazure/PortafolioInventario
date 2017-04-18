@@ -50,15 +50,16 @@ namespace CapaDeDatos
                     cx.Open();
                     cmd.Parameters.AddWithValue("@NombreUsuario", NombreUsuario);
                     cmd.Parameters.AddWithValue("@PassWordU", PasswordEncriptado);
+                    
+                    Retorna = (int)cmd.ExecuteScalar();
                     cmd.ExecuteNonQuery();
-                    Retorna =  (int)cmd.ExecuteScalar();
                     if (Retorna == -1)
                     {
                         return Mensaje = "Ya existe";
                     }
                     else
                     {
-                        return Mensaje = "No existe";
+                        return Mensaje = "";
                     }
                         }
                 catch (Exception ex)
@@ -68,20 +69,30 @@ namespace CapaDeDatos
             }
         }
         //aqui creo q puedo hacer poliformismo o sobre carga de metodos
-        public DataTable VerificarLogin(string PasswordU)
+        public string VerificarLogin(string usuario, string PasswordU)
         {
             using (SqlConnection cx = new SqlConnection(Conexion))
             {
-                SqlCommand cmd = new SqlCommand("select * from Login where PassWordU = @PassWordU ", cx);
+                SqlCommand cmd = new SqlCommand("SpLoginIngreso", cx);
+                cmd.CommandType = CommandType.StoredProcedure;
                 string PasswordEncriptado = FormsAuthentication.HashPasswordForStoringInConfigFile(PasswordU, "SHA1");
                 cx.Open();
                 cmd.Parameters.AddWithValue("@PassWordU", PasswordEncriptado);
+                cmd.Parameters.AddWithValue("@NombreUsuario", usuario);
+                int valor = (int)cmd.ExecuteScalar();
+                if (valor == -1)
+                {
+                    return Mensaje = "";
+                }
+                else {
+                    return Mensaje = "No";
+                }
                 cmd.ExecuteNonQuery();
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                DataSet dt = new DataSet();
-                da.Fill(dt);
+                //SqlDataAdapter da = new SqlDataAdapter(cmd);
+                //DataSet dt = new DataSet();
+                //da.Fill(dt);
                 //Cantidad = dt.Tables.Count;
-                return dt.Tables[0];
+                //return dt.Tables[0];
             }
         }
 

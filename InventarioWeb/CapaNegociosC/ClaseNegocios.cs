@@ -10,6 +10,7 @@ namespace CapaNegociosC
 {
     public class ClaseNegocios
     {
+        public string mensaje { get; set; }
         CapaConexion Cx = new CapaConexion();
         #region Metodo Lectura datos        
         public DataTable Infos()
@@ -21,11 +22,12 @@ namespace CapaNegociosC
         public string CrearUsuario(string NombreUsuario,string PasswordU)
         {
             Cx.CrearUsuario(NombreUsuario, PasswordU);
-            return Cx.Mensaje;
+            return  mensaje = Cx.Mensaje;
         }
-        public DataTable VerificarLogin(string PassWordU)
+        public string VerificarLogin( string Usuario, string PassWordU)
         {
-            return Cx.VerificarLogin(PassWordU);
+             Cx.VerificarLogin(Usuario, PassWordU);
+            return mensaje = Cx.Mensaje;
         }
 
 
