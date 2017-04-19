@@ -11,7 +11,21 @@
     <script src="EstiloWeb/jquery-1.10.2.js"></script>
 </head>
 <body>
+   
+
     <form id="form" runat="server">
+         <asp:Menu ID="Menu1" ForeColor="Black" StaticDisplayLevels="1" DisappearAfter="2000"  runat="server">
+             
+
+   <%-- <Items>
+        <asp:MenuItem Text="Home" Value="Home" NavigateUrl="~/Login.aspx"></asp:MenuItem>
+        <asp:MenuItem Text="Crear" Value="Crear" NavigateUrl="~/CrearAlmacenista.aspx" >
+             <asp:MenuItem Text="Crear" Value="Crear" NavigateUrl="~/CrearAlmacenista.aspx" >
+            </asp:MenuItem>
+
+        </asp:MenuItem>
+    </Items>--%>
+</asp:Menu>
         <asp:ScriptManager runat="server"></asp:ScriptManager>
         <asp:UpdatePanel runat="server">
             <ContentTemplate>

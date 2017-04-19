@@ -10,9 +10,15 @@ namespace CapaNegociosC
 {
     public class ClaseNegocios
     {
+        
         public string mensaje { get; set; }
         CapaConexion Cx = new CapaConexion();
         #region Metodo Lectura datos        
+        public DataSet ObtenerMenu()
+        {
+            
+            return Cx.ObtenerMenu();
+        }
         public DataTable Infos()
         {
             return Cx.Info();

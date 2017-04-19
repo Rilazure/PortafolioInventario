@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Security;
+using System.Web.UI.WebControls;
 
 namespace CapaDeDatos
 {
@@ -50,7 +51,7 @@ namespace CapaDeDatos
                     cx.Open();
                     cmd.Parameters.AddWithValue("@NombreUsuario", NombreUsuario);
                     cmd.Parameters.AddWithValue("@PassWordU", PasswordEncriptado);
-                    
+
                     Retorna = (int)cmd.ExecuteScalar();
                     cmd.ExecuteNonQuery();
                     if (Retorna == -1)
@@ -61,7 +62,7 @@ namespace CapaDeDatos
                     {
                         return Mensaje = "";
                     }
-                        }
+                }
                 catch (Exception ex)
                 {
                     throw ex;
@@ -84,7 +85,8 @@ namespace CapaDeDatos
                 {
                     return Mensaje = "";
                 }
-                else {
+                else
+                {
                     return Mensaje = "No";
                 }
                 cmd.ExecuteNonQuery();
@@ -99,7 +101,7 @@ namespace CapaDeDatos
         {
             using (SqlConnection cx = new SqlConnection(Conexion))
             {
-                SqlCommand cmd = new SqlCommand("insert into Almacenista values (@Nombre,@Cedula,@FechaCreacion)",cx);
+                SqlCommand cmd = new SqlCommand("insert into Almacenista values (@Nombre,@Cedula,@FechaCreacion)", cx);
                 cx.Open();
                 cmd.Parameters.AddWithValue("@Nombre", Nombre);
                 cmd.Parameters.AddWithValue("@Cedula", Cedula);
@@ -185,6 +187,18 @@ namespace CapaDeDatos
         //Consultar historial 
         //Prestamo este se hace por medio del Id que se ha generado 
         //Estos datos son para llenar DropDownList
+        public DataSet ObtenerMenu()
+        {
+            using (SqlConnection cx = new SqlConnection(Conexion))
+            {
+                SqlDataAdapter Da = new SqlDataAdapter("spObtenerMenu", cx);
+                DataSet dt = new DataSet();
+                Da.Fill(dt);
+               
+                return dt;
+
+            }
+        }
         public DataTable Info()
         {
             using (SqlConnection cx = new SqlConnection(Conexion))
@@ -202,7 +216,7 @@ namespace CapaDeDatos
         {
             using (SqlConnection cx = new SqlConnection(Conexion))
             {
-                SqlCommand cmd = new SqlCommand("select Nombre,Cedula,FechaCreacion as [Fecha de Ingreso] from  Almacenista where Cedula = @Cedula",cx);
+                SqlCommand cmd = new SqlCommand("select Nombre,Cedula,FechaCreacion as [Fecha de Ingreso] from  Almacenista where Cedula = @Cedula", cx);
                 cx.Open();
                 cmd.Parameters.AddWithValue("@Cedula", Cedula);
                 cmd.ExecuteNonQuery();

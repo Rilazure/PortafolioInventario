@@ -74,6 +74,7 @@
     <Content Include="EstiloWeb\jquery-1.10.2.min.js" />
     <Content Include="IngresoElementos.aspx" />
     <Content Include="Login.aspx" />
+    <Content Include="menu.ascx" />
     <Content Include="packages.config" />
     <Content Include="RegistroUsuario\Registro.aspx" />
     <Content Include="RegistroUsuario\Web.config" />
@@ -111,6 +112,13 @@
     </Compile>
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="menu.ascx.cs">
+      <DependentUpon>menu.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="menu.ascx.designer.cs">
+      <DependentUpon>menu.ascx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PruebaVista.aspx.cs">
