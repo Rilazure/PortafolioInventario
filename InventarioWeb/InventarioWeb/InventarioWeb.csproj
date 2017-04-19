@@ -65,6 +65,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="CrearAlmacenista.aspx" />
     <Content Include="EstiloWeb\bootstrap.css" />
     <Content Include="EstiloWeb\bootstrap.js" />
     <Content Include="EstiloWeb\bootstrap.min.css" />
@@ -90,6 +91,13 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CrearAlmacenista.aspx.cs">
+      <DependentUpon>CrearAlmacenista.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CrearAlmacenista.aspx.designer.cs">
+      <DependentUpon>CrearAlmacenista.aspx</DependentUpon>
+    </Compile>
     <Compile Include="IngresoElementos.aspx.cs">
       <DependentUpon>IngresoElementos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

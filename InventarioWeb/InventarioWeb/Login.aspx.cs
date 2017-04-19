@@ -16,9 +16,14 @@ namespace InventarioWeb
         ClaseNegocios Cn = new ClaseNegocios();
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {                
+               
+            }
         }
         protected void BtnGuardar_Click(object sender, EventArgs e)
         {
+            Session["Prueba"] = TxtNombre.Text;
             if (FormsAuthentication.Authenticate(TxtNombre.Text, TxtPassword.Text))
             {
                 FormsAuthentication.RedirectFromLoginPage(TxtNombre.Text, CheckRicar.Checked);
@@ -28,10 +33,11 @@ namespace InventarioWeb
                 Mensajes.Text = "Invalido";
             }
 
-            Authenticate(TxtNombre.Text, TxtPassword.Text);
+            Authenticate(TxtNombre.Text,  TxtPassword.Text);
             if (Mensajes.Text == "")
             {
                 Response.Redirect("~/PruebaVista.aspx");
+                //Response.Write(ViewState["Prueba"]);
             }
             else
             {
