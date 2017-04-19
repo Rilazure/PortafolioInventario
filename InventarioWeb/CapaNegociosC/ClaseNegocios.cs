@@ -17,6 +17,10 @@ namespace CapaNegociosC
         {
             return Cx.Info();
         }
+        public DataTable ConsultaAlmacenista(int Cedula)
+        {
+            return Cx.ConsultaAlmacenista(Cedula);
+        }
         #endregion
         #region Metodos ingreso datos        
         public string CrearUsuario(string NombreUsuario,string PasswordU)
@@ -55,6 +59,6 @@ namespace CapaNegociosC
         {
             Cx.ActualizarHistorial(FechaGestion, Observaciones, fk_Prestamo);
         }
-        #endregion
+        #endregion       
     }
 }

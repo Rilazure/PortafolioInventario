@@ -22,13 +22,22 @@ namespace InventarioWeb {
         protected global::System.Web.UI.HtmlControls.HtmlForm form;
         
         /// <summary>
-        /// BtnVerPnlRegistro control.
+        /// Registro control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnVerPnlRegistro;
+        protected global::System.Web.UI.WebControls.Button Registro;
+        
+        /// <summary>
+        /// Consulta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Consulta;
         
         /// <summary>
         /// PnlRegistro control.
@@ -83,5 +92,50 @@ namespace InventarioWeb {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button GuardarAlmacenista;
+        
+        /// <summary>
+        /// lblEx control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblEx;
+        
+        /// <summary>
+        /// PnlConsultarAlmacenista control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel PnlConsultarAlmacenista;
+        
+        /// <summary>
+        /// TxtCedulaConsulta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TxtCedulaConsulta;
+        
+        /// <summary>
+        /// BtnConsultarAlmacenista control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnConsultarAlmacenista;
+        
+        /// <summary>
+        /// Gv_DatosAlmacenista control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView Gv_DatosAlmacenista;
     }
 }

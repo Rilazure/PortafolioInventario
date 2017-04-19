@@ -15,27 +15,43 @@
         <asp:ScriptManager runat="server"></asp:ScriptManager>
         <asp:UpdatePanel runat="server">
             <ContentTemplate>
-                <asp:Button CssClass="btn btn-primary btn-lg active" ID="BtnVerPnlRegistro" Text="Registrar" runat="server" OnClick="BtnVerPnlRegistro_Click" />
-
-
-                <asp:Panel runat="server" Visible="false" ID="PnlRegistro">
-                    <div  class="form-horizontal" runat="server">
+                    <asp:Button CssClass="btn btn-primary btn-lg active" ID="Registro" Text="Registrar Nuevo Almacenista" runat="server" OnClick="Registro_Click"  />                
+                 <asp:Button CssClass="btn btn-primary btn-lg active" ID="Consulta" Text="Consultar Almacenista Creado" runat="server" OnClick="Consulta_Click" />               
+                <asp:Panel runat="server"  ID="PnlRegistro">
+                    <div class="form-horizontal" runat="server">
                         <div class="form-group">
-
                             <asp:Label CssClass="col-sm-2 control-label" runat="server" ID="LblNombre">Nombre</asp:Label>
                             <div class="col-sm-10">
-                                <asp:TextBox CssClass="form-control" Width="50%" runat="server" ID="TxtNombre"></asp:TextBox>
+                                <asp:TextBox CssClass="form-control" ValidationGroup="Dato" Width="50%" runat="server" ID="TxtNombre"></asp:TextBox>
                             </div>
                         </div>
-
                         <div class="form-group">
                             <asp:Label CssClass="col-sm-2 control-label" runat="server" ID="LblCedula">Cedula</asp:Label>
+                                <%--<asp:RangeValidator runat="server" Font-Size="10px"  Display="Dynamic" SetFocusOnError="true" ControlToValidate="TxtNombre"  ValidationExpression="((MT)?(MT)?)*([0-9]{4,4})*" >No</asp:RangeValidator>--%>
+                        <asp:RegularExpressionValidator Font-Size="10px" runat="server" ControlToValidate="TxtNombre" Display="Dynamic" SetFocusOnError="True" ValidationExpression="((MT)?(MT)?)*([0-9]{4,4})*">Codigo mal escrito, Ejemplo(MT0000)</asp:RegularExpressionValidator> 
                             <div class="col-sm-10">
-                                <asp:TextBox CssClass="form-control" Width="50%" runat="server" ID="TxtCedula"></asp:TextBox>
-                                <asp:Button CssClass="btn btn-primary btn-lg active" ID="GuardarAlmacenista" Text="Guardar" runat="server" />
+                            
+                                <asp:TextBox CssClass="form-control" Width="50%" runat="server"   ValidationGroup="Dato" ID="TxtCedula"></asp:TextBox>
+                                <asp:Button CssClass="btn btn-primary btn-lg active"  ValidationGroup="Dato" ID="GuardarAlmacenista" Text="Guardar" runat="server" OnClick="GuardarAlmacenista_Click" />
                             </div>
                         </div>
-                      </div>
+                    </div>
+                    <div class="col-md-8">
+                    <asp:Label runat="server" CssClass="alert alert-danger" ID="lblEx"></asp:Label>
+                        </div>
+                </asp:Panel>
+                <asp:Panel ID="PnlConsultarAlmacenista" runat="server">                  
+                    <div class="form-horizontal" runat="server">
+                        <div class="input-group col-md-4">
+                           <div class="input-group-addon">Número de Documento</div>                          
+                            <asp:TextBox ID="TxtCedulaConsulta" Width="50%" runat="server" CssClass="form-control" ></asp:TextBox>
+                        </div>
+                        <div class="col-md-4">
+                            <asp:Button Id="BtnConsultarAlmacenista" CssClass="btn btn-primary btn-lg active" Text="Consultar"  runat="server" OnClick="BtnConsultarAlmacenista_Click" />
+                        </div>
+                    </div>
+                      </section>
+                    <asp:GridView ID="Gv_DatosAlmacenista" runat="server"></asp:GridView>
                 </asp:Panel>
             </ContentTemplate>
         </asp:UpdatePanel>

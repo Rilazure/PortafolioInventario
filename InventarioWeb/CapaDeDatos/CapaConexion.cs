@@ -95,17 +95,15 @@ namespace CapaDeDatos
                 //return dt.Tables[0];
             }
         }
-
-
-
         public void CrearAlmacenista(string Nombre, int Cedula)
         {
             using (SqlConnection cx = new SqlConnection(Conexion))
             {
-                SqlCommand cmd = new SqlCommand("insert into Almacenista values @Nombre,@Cedula");
+                SqlCommand cmd = new SqlCommand("insert into Almacenista values (@Nombre,@Cedula,@FechaCreacion)",cx);
                 cx.Open();
                 cmd.Parameters.AddWithValue("@Nombre", Nombre);
                 cmd.Parameters.AddWithValue("@Cedula", Cedula);
+                cmd.Parameters.AddWithValue("@FechaCreacion", DateTime.Now);
                 cmd.ExecuteNonQuery();
             }
         }
@@ -199,10 +197,23 @@ namespace CapaDeDatos
                 return dt.Tables[0];
             }
         }
-
+        //Este metodo servira para el ddl cuando necesite el nombre del almacenista
+        public DataTable ConsultaAlmacenista(int Cedula)
+        {
+            using (SqlConnection cx = new SqlConnection(Conexion))
+            {
+                SqlCommand cmd = new SqlCommand("select Nombre,Cedula,FechaCreacion as [Fecha de Ingreso] from  Almacenista where Cedula = @Cedula",cx);
+                cx.Open();
+                cmd.Parameters.AddWithValue("@Cedula", Cedula);
+                cmd.ExecuteNonQuery();
+                SqlDataAdapter Da = new SqlDataAdapter(cmd);
+                DataSet dt = new DataSet();
+                Da.Fill(dt);
+                return dt.Tables[0];
+            }
+        }
         #endregion
         #region Datos Importantes para los drl Items.Insert(0,"-Seleccione-")
-
         #endregion
     }
 }
