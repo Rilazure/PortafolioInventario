@@ -1,5 +1,8 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CrearAlmacenista.aspx.cs" Inherits="InventarioWeb.CrearAlmacenista" %>
 
+<%@ Register Src="~/menu.ascx" TagPrefix="Control" TagName="menu" %>
+
+
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -10,11 +13,9 @@
     <link href="EstiloWeb/bootstrap.min.css" rel="stylesheet" />
     <script src="EstiloWeb/jquery-1.10.2.js"></script>
 </head>
-<body>
-   
-
+<body>   
     <form id="form" runat="server">
-         <asp:Menu ID="Menu1" ForeColor="Black" StaticDisplayLevels="1" DisappearAfter="2000"  runat="server">
+       <%--  <asp:Menu ID="Menu1" ForeColor="Black" StaticDisplayLevels="1" DisappearAfter="2000"  runat="server">--%>
              
 
    <%-- <Items>
@@ -25,8 +26,9 @@
 
         </asp:MenuItem>
     </Items>--%>
-</asp:Menu>
+<%--</asp:Menu>--%>
         <asp:ScriptManager runat="server"></asp:ScriptManager>
+            <Control:menu runat="server" id="menu" />
         <asp:UpdatePanel runat="server">
             <ContentTemplate>
                     <asp:Button CssClass="btn btn-primary btn-lg active" ID="Registro" Text="Registrar Nuevo Almacenista" runat="server" OnClick="Registro_Click"  />                

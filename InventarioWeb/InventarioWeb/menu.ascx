@@ -10,13 +10,17 @@
     <DynamicMenuItemStyle HorizontalPadding="5px" VerticalPadding="2px" />
     <StaticHoverStyle BackColor="#284E98" ForeColor="White" />
 </asp:Menu>--%>
-<asp:Menu ID="Menu1" runat="server">
-    <Items>
+  
+         <asp:Menu ID="Menu1" ForeColor="Black" BackColor="Red"  StaticDisplayLevels="1" DisappearAfter="2000"  runat="server">
+             
+
+   <%-- <Items>
         <asp:MenuItem Text="Home" Value="Home" NavigateUrl="~/Login.aspx"></asp:MenuItem>
         <asp:MenuItem Text="Crear" Value="Crear" NavigateUrl="~/CrearAlmacenista.aspx" >
              <asp:MenuItem Text="Crear" Value="Crear" NavigateUrl="~/CrearAlmacenista.aspx" >
             </asp:MenuItem>
 
         </asp:MenuItem>
-    </Items>
+    </Items>--%>
 </asp:Menu>
+   
