@@ -19,15 +19,19 @@ namespace InventarioWeb.RegistroUsuario
         }
         protected void BtnGuardar_Click(object sender, EventArgs e)
         {
-          CrearUsuario(TxtNombre.Text, TxtPassword.Text);
+          CrearUsuario(TxtNombre.Text,TxtPassword.Text,Convert.ToInt32(TxtCedula.Text),Convert.ToInt32(TxtPerfil.Text));
             if (Mensaje.Text == "")
             {
                 Response.Redirect("~/Login.aspx");
             }
+            else
+            {
+                Response.Write("Usuario " + TxtNombre.Text + " Ya existe");
+            }
         }
-        public string CrearUsuario(string nombre, string Pass)
+        public string CrearUsuario(string nombre, string Pass,int cedula,int Fk_Perfil)
         {
-            Cn.CrearUsuario(nombre, Pass);
+            Cn.CrearUsuario(nombre, Pass,cedula,Fk_Perfil);
             return Mensaje.Text = Cn.mensaje;
            
         }

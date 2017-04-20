@@ -38,20 +38,22 @@ namespace CapaDeDatos
         #endregion
         #region Insertar Datos
         //Este metodo es para el Login seguridad.
-        public string CrearUsuario(string NombreUsuario, string PasswordU)
+        public string CrearUsuario(string Nombre, string PasswordU,int Cedula,int Fk_Perfil)
         {
             using (SqlConnection cx = new SqlConnection(Conexion))
             {
                 try
                 {
-                    SqlCommand cmd = new SqlCommand("spNew", cx);
+                    SqlCommand cmd = new SqlCommand("SpNewUsers", cx);
                     cmd.CommandType = CommandType.StoredProcedure;
                     //SqlDataAdapter da = new SqlDataAdapter("Select * from Login where @NombreUsuario", NombreUsuario);
                     string PasswordEncriptado = FormsAuthentication.HashPasswordForStoringInConfigFile(PasswordU, "SHA1");
                     cx.Open();
-                    cmd.Parameters.AddWithValue("@NombreUsuario", NombreUsuario);
+                    cmd.Parameters.AddWithValue("@Nombre", Nombre);
                     cmd.Parameters.AddWithValue("@PassWordU", PasswordEncriptado);
-
+                    cmd.Parameters.AddWithValue("@Cedula", Cedula);
+                    cmd.Parameters.AddWithValue("@Fk_Perfil", Fk_Perfil);
+                    cmd.Parameters.AddWithValue("@FechaCreacion", DateTime.Now);
                     Retorna = (int)cmd.ExecuteScalar();
                     cmd.ExecuteNonQuery();
                     if (Retorna == -1)

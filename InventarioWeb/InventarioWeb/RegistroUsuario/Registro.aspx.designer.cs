@@ -40,6 +40,24 @@ namespace InventarioWeb.RegistroUsuario {
         protected global::System.Web.UI.WebControls.TextBox TxtPassword;
         
         /// <summary>
+        /// TxtCedula control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TxtCedula;
+        
+        /// <summary>
+        /// TxtPerfil control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TxtPerfil;
+        
+        /// <summary>
         /// BtnGuardar control.
         /// </summary>
         /// <remarks>

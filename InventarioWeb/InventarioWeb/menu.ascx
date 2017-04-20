@@ -10,9 +10,11 @@
     <DynamicMenuItemStyle HorizontalPadding="5px" VerticalPadding="2px" />
     <StaticHoverStyle BackColor="#284E98" ForeColor="White" />
 </asp:Menu>--%>
-  
-         <asp:Menu ID="Menu1" ForeColor="Black" BackColor="Red"  StaticDisplayLevels="1" DisappearAfter="2000"  runat="server">
-             
+   <%--<asp:Menu ID="menugest" runat="server" StaticPopOutImageUrl="~/Css2/Imagenes/flecha.png" DynamicPopOutImageUrl="~/Css2/Imagenes/flecha.png" DynamicHorizontalOffset="2" Font-Names="Verdana" Font-Size="Small" Orientation="Horizontal" StaticSubMenuIndent="10px" StaticMenuStyle-CssClass ="Menu" StaticMenuItemStyle-CssClass="Celdas" StaticHoverStyle-CssClass="Celdas-Hover" DynamicMenuItemStyle-CssClass="Celdas" DynamicMenuStyle-CssClass="Fondo_Trans_Hover" DynamicHoverStyle-CssClass="Celdas-Hover" DynamicSelectedStyle-CssClass="Fondo_Trans_Hover" SkipLinkText="">--%>
+         <asp:Menu ID="Menu1" ForeColor="Black"   DisappearAfter="2000"  runat="server" DynamicHorizontalOffset="2" Font-Names="Verdana" Font-Size="Small" Orientation="Horizontal" StaticSubMenuIndent="10px" StaticMenuStyle-CssClass ="Menu" StaticMenuItemStyle-CssClass="Celdas" StaticHoverStyle-CssClass="Celdas-Hover" DynamicMenuItemStyle-CssClass="Celdas" DynamicMenuStyle-CssClass="Fondo_Trans_Hover" DynamicHoverStyle-CssClass="Celdas-Hover" DynamicSelectedStyle-CssClass="Fondo_Trans_Hover" SkipLinkText="">
+           <StaticMenuItemStyle HorizontalPadding="5px" VerticalPadding="2px" />
+        <DynamicMenuItemStyle HorizontalPadding="5px" VerticalPadding="2px" />
+        <DynamicMenuStyle BackColor="transparent"/>  
 
    <%-- <Items>
         <asp:MenuItem Text="Home" Value="Home" NavigateUrl="~/Login.aspx"></asp:MenuItem>
@@ -23,4 +25,4 @@
         </asp:MenuItem>
     </Items>--%>
 </asp:Menu>
-   
+      <div class="Small-Title"><asp:Label runat="server" ID="Titulo_Formulario"></asp:Label></div>

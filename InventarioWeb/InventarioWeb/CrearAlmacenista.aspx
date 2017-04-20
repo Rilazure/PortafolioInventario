@@ -12,12 +12,11 @@
     <link href="EstiloWeb/bootstrap.css" rel="stylesheet" />
     <link href="EstiloWeb/bootstrap.min.css" rel="stylesheet" />
     <script src="EstiloWeb/jquery-1.10.2.js"></script>
+    <link href="Style/CssInv.css" rel="stylesheet" />
 </head>
 <body>   
-    <form id="form" runat="server">
-       <%--  <asp:Menu ID="Menu1" ForeColor="Black" StaticDisplayLevels="1" DisappearAfter="2000"  runat="server">--%>
-             
-
+    <form id="form" runat="server">                     
+        <%--  <asp:Menu ID="Menu1" ForeColor="Black" StaticDisplayLevels="1" DisappearAfter="2000"  runat="server">--%>             
    <%-- <Items>
         <asp:MenuItem Text="Home" Value="Home" NavigateUrl="~/Login.aspx"></asp:MenuItem>
         <asp:MenuItem Text="Crear" Value="Crear" NavigateUrl="~/CrearAlmacenista.aspx" >

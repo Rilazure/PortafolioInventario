@@ -17,6 +17,16 @@
                 <asp:Label runat="server">Password</asp:Label>
                 <asp:TextBox id="TxtPassword" runat="server"></asp:TextBox>
             </div>
+              <div>
+                <asp:Label runat="server">Cedula</asp:Label>
+                <asp:TextBox id="TxtCedula" runat="server"></asp:TextBox>
+            </div>
+              <div>
+                <asp:Label runat="server">Perfil</asp:Label>
+                <asp:TextBox id="TxtPerfil" runat="server"></asp:TextBox>
+            </div>
+
+
             <asp:Button Text="Guardar"  id="BtnGuardar" runat="server" OnClick="BtnGuardar_Click"/>
             <asp:Button ID="Button1" runat="server" Text="Button" />
             <asp:Label ID="Mensaje" runat="server" ></asp:Label>

@@ -15,8 +15,7 @@ namespace CapaNegociosC
         CapaConexion Cx = new CapaConexion();
         #region Metodo Lectura datos        
         public DataSet ObtenerMenu()
-        {
-            
+        {            
             return Cx.ObtenerMenu();
         }
         public DataTable Infos()
@@ -29,9 +28,9 @@ namespace CapaNegociosC
         }
         #endregion
         #region Metodos ingreso datos        
-        public string CrearUsuario(string NombreUsuario,string PasswordU)
+        public string CrearUsuario(string NombreUsuario,string PasswordU,int Cedula,int Fk_Perfil)
         {
-            Cx.CrearUsuario(NombreUsuario, PasswordU);
+            Cx.CrearUsuario(NombreUsuario, PasswordU,Cedula,Fk_Perfil);
             return  mensaje = Cx.Mensaje;
         }
         public string VerificarLogin( string Usuario, string PassWordU)

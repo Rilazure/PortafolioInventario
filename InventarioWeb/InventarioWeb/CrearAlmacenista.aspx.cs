@@ -17,8 +17,8 @@ namespace InventarioWeb
         {
             if (!IsPostBack)
             {
-             
-                //PnlRegistro.Visible = false;
+
+                PnlRegistro.Visible = false;
                 PnlConsultarAlmacenista.Visible = false;
                 lblEx.Visible = false;
             }
