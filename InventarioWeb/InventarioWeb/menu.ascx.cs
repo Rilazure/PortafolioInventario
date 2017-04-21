@@ -17,13 +17,12 @@ namespace InventarioWeb
             if (!IsPostBack)
             {
                 LabelPerfil.Text = (string)(Session["Perfil"]).ToString();
-                ObtenerMenu();                                                         
+                ObtenerMenu();
             }
-        }                                
+        }
         public void ObtenerMenu()
-        {                        
+        {
             Cn.ObtenerMenu(Convert.ToInt32(LabelPerfil.Text));
-
             DataSet dt = new DataSet();
             dt = Cn.ObtenerMenu(Convert.ToInt32(LabelPerfil.Text));
             dt.Relations.Add("ChildRows", dt.Tables[0].Columns["Id"], dt.Tables[1].Columns["ParentId"]);
@@ -42,6 +41,6 @@ namespace InventarioWeb
                 }
                 Menu1.Items.Add(item);
             }
-        }
+        }        
     }
 }

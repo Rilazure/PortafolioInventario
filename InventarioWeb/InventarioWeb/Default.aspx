@@ -14,6 +14,11 @@
     <form id="form1" runat="server">
 <uc1:menu runat="server" ID="menu" />
         <div>
+            <div>
+                <asp:Button runat="server" text="SALIR" ID="BtnSalir" OnClick="BtnSalir_Click" />
+
+            </div>
+
 
         </div>
     </form>
