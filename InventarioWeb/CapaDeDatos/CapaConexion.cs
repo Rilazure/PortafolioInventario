@@ -31,6 +31,7 @@ namespace CapaDeDatos
         public int Retorna { get; set; }
         public string Mensaje { get; set; }
         public string Referencia { get; set; }
+        public int Valor { get; set; }
         #endregion
         #region Conexion Base de datos
         string Conexion = ConfigurationManager.ConnectionStrings["DBZ"].ConnectionString;
@@ -72,7 +73,7 @@ namespace CapaDeDatos
             }
         }
         //aqui creo q puedo hacer poliformismo o sobre carga de metodos
-        public string VerificarLogin(string usuario, string PasswordU)
+        public int VerificarLogin(string usuario, string PasswordU)
         {
             using (SqlConnection cx = new SqlConnection(Conexion))
             {
@@ -81,22 +82,21 @@ namespace CapaDeDatos
                 string PasswordEncriptado = FormsAuthentication.HashPasswordForStoringInConfigFile(PasswordU, "SHA1");
                 cx.Open();
                 cmd.Parameters.AddWithValue("@PassWordU", PasswordEncriptado);
-                cmd.Parameters.AddWithValue("@NombreUsuario", usuario);
-                int valor = (int)cmd.ExecuteScalar();
-                if (valor == -1)
+                cmd.Parameters.AddWithValue("@Nombre", usuario);
+                Valor = (int)cmd.ExecuteScalar();
+                if (Valor !=0 )
                 {
-                    return Mensaje = "";
+                  
+                    return Valor;
                 }
                 else
                 {
-                    return Mensaje = "No";
+                    return Valor = 0;
                 }
-                cmd.ExecuteNonQuery();
-                //SqlDataAdapter da = new SqlDataAdapter(cmd);
-                //DataSet dt = new DataSet();
-                //da.Fill(dt);
-                //Cantidad = dt.Tables.Count;
-                //return dt.Tables[0];
+
+                
+                
+                
             }
         }
         public void CrearAlmacenista(string Nombre, int Cedula)
@@ -189,11 +189,17 @@ namespace CapaDeDatos
         //Consultar historial 
         //Prestamo este se hace por medio del Id que se ha generado 
         //Estos datos son para llenar DropDownList
-        public DataSet ObtenerMenu()
+        public DataSet ObtenerMenu(int perfil)
         {
             using (SqlConnection cx = new SqlConnection(Conexion))
             {
-                SqlDataAdapter Da = new SqlDataAdapter("spObtenerMenu", cx);
+                SqlCommand cmd = new SqlCommand("spObtenerMenu", cx);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cx.Open();
+                cmd.Parameters.AddWithValue("@Fk_Perfil", perfil);
+                cmd.ExecuteNonQuery();
+
+                    SqlDataAdapter Da = new SqlDataAdapter(cmd);
                 DataSet dt = new DataSet();
                 Da.Fill(dt);
                

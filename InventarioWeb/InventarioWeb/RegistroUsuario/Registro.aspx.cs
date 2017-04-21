@@ -15,7 +15,10 @@ namespace InventarioWeb.RegistroUsuario
         ClaseNegocios Cn = new ClaseNegocios();
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
 
+            }
         }
         protected void BtnGuardar_Click(object sender, EventArgs e)
         {
@@ -32,8 +35,7 @@ namespace InventarioWeb.RegistroUsuario
         public string CrearUsuario(string nombre, string Pass,int cedula,int Fk_Perfil)
         {
             Cn.CrearUsuario(nombre, Pass,cedula,Fk_Perfil);
-            return Mensaje.Text = Cn.mensaje;
-           
+            return Mensaje.Text = Cn.mensaje;           
         }
     }
 }

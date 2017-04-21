@@ -23,31 +23,37 @@ namespace InventarioWeb
         }
         protected void BtnGuardar_Click(object sender, EventArgs e)
         {
-            Session["Prueba"] = TxtNombre.Text;
-            if (FormsAuthentication.Authenticate(TxtNombre.Text, TxtPassword.Text))
-            {
-                FormsAuthentication.RedirectFromLoginPage(TxtNombre.Text, CheckRicar.Checked);
-            }
-            else
-            {
-                Mensajes.Text = "Invalido";
-            }
+
+            
+            //if (FormsAuthentication.Authenticate(TxtNombre.Text, TxtPassword.Text))
+            //{
+            //    FormsAuthentication.RedirectFromLoginPage(TxtNombre.Text, CheckRicar.Checked);
+            //}
+            //else
+            //{
+            //    Mensajes.Text = "Invalido";
+            //}
 
             Authenticate(TxtNombre.Text,  TxtPassword.Text);
-            if (Mensajes.Text == "")
+            if (Cn.Valor != 0)
             {
-                Response.Redirect("~/PruebaVista.aspx");
+                FormsAuthentication.RedirectFromLoginPage
+                  (TxtNombre.Text, false);
+                Session.Add("Perfil", Cn.Valor);
+
+                //Response.Redirect("~/Default.aspx");
                 //Response.Write(ViewState["Prueba"]);
+                //Response.Write((string)(Session["Perfil"]));
             }
             else
             {
                 Response.Write("no");
             }
         }
-        public string Authenticate(string nombre,string Pass)
+        public int Authenticate(string nombre,string Pass)
         {
             Cn.VerificarLogin(nombre, Pass);
-            return Mensajes.Text =  Cn.mensaje;
+            return  Cn.Valor;
         }       
     }
 }

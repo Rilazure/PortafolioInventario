@@ -26,3 +26,4 @@
     </Items>--%>
 </asp:Menu>
       <div class="Small-Title"><asp:Label runat="server" ID="Titulo_Formulario"></asp:Label></div>
+<div><asp:Label runat="server" ID="LabelPerfil"> </asp:Label></div>

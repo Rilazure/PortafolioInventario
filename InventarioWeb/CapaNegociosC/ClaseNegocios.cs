@@ -12,11 +12,12 @@ namespace CapaNegociosC
     {
         
         public string mensaje { get; set; }
+        public int Valor { get; set; }
         CapaConexion Cx = new CapaConexion();
         #region Metodo Lectura datos        
-        public DataSet ObtenerMenu()
+        public DataSet ObtenerMenu(int perfil)
         {            
-            return Cx.ObtenerMenu();
+            return Cx.ObtenerMenu(perfil);
         }
         public DataTable Infos()
         {
@@ -33,10 +34,10 @@ namespace CapaNegociosC
             Cx.CrearUsuario(NombreUsuario, PasswordU,Cedula,Fk_Perfil);
             return  mensaje = Cx.Mensaje;
         }
-        public string VerificarLogin( string Usuario, string PassWordU)
+        public int VerificarLogin( string Usuario, string PassWordU)
         {
              Cx.VerificarLogin(Usuario, PassWordU);
-            return mensaje = Cx.Mensaje;
+            return Valor = Cx.Valor;
         }
 
 
