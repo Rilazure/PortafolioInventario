@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Security;
 using System.Web.UI.WebControls;
+using Entidades;
 
 namespace CapaDeDatos
 {
@@ -31,7 +32,7 @@ namespace CapaDeDatos
         public int Retorna { get; set; }
         public string Mensaje { get; set; }
         public string Referencia { get; set; }
-        public int Valor { get; set; }
+        public string Valor { get; set; }
         #endregion
         #region Conexion Base de datos
         string Conexion = ConfigurationManager.ConnectionStrings["DBZ"].ConnectionString;
@@ -73,7 +74,7 @@ namespace CapaDeDatos
             }
         }
         //aqui creo q puedo hacer poliformismo o sobre carga de metodos
-        public int VerificarLogin(string usuario, string PasswordU)
+        public string VerificarLogin(string usuario, string PasswordU)
         {
             using (SqlConnection cx = new SqlConnection(Conexion))
             {
@@ -83,20 +84,16 @@ namespace CapaDeDatos
                 cx.Open();
                 cmd.Parameters.AddWithValue("@PassWordU", PasswordEncriptado);
                 cmd.Parameters.AddWithValue("@Nombre", usuario);
-                Valor = (int)cmd.ExecuteScalar();
-                 if (Valor !=0 )
+                Valor = Convert.ToString( cmd.ExecuteScalar());
+                 if (Valor !="no" )
                 {
                   
                     return Valor;
                 }
                 else
                 {
-                    return Valor = 0;
-                }
-
-                
-                
-                
+                    return Valor = "No";
+                }                                                
             }
         }
         public void CrearAlmacenista(string Nombre, int Cedula)
@@ -189,14 +186,14 @@ namespace CapaDeDatos
         //Consultar historial 
         //Prestamo este se hace por medio del Id que se ha generado 
         //Estos datos son para llenar DropDownList
-        public DataSet ObtenerMenu(int perfil)
+        public DataSet ObtenerMenu(string perfil)
         {
             using (SqlConnection cx = new SqlConnection(Conexion))
             {
                 SqlCommand cmd = new SqlCommand("spObtenerMenu", cx);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cx.Open();
-                cmd.Parameters.AddWithValue("@Fk_Perfil", perfil);
+                cmd.Parameters.AddWithValue("@Perfil", perfil);
                 cmd.ExecuteNonQuery();
 
                     SqlDataAdapter Da = new SqlDataAdapter(cmd);
@@ -232,6 +229,34 @@ namespace CapaDeDatos
                 DataSet dt = new DataSet();
                 Da.Fill(dt);
                 return dt.Tables[0];
+            }
+        }
+
+        public List<UsuariosE> ListarUsuario()
+        {
+            using (SqlConnection cx = new SqlConnection(Conexion))
+            {
+                List<UsuariosE> lista = new List<UsuariosE>();
+                SqlCommand cmd = new SqlCommand("select IdUsuarios,Nombre,Cedula,FechaCreacion,Perfil  from  Usuarios U join Perfil P on U.IdUsuarios = P.IdPerfil",cx);
+                SqlDataAdapter Da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                cx.Open();
+                Da.Fill(dt);
+                foreach (DataRow dr in dt.Rows)
+                {
+                    lista.Add(
+                        new UsuariosE
+                        {
+                            IdUsuarios = Convert.ToInt32(dr["IdUsuarios"]),
+                            Nombre = Convert.ToString(dr["Nombre"]),
+                            Cedula = Convert.ToInt32(dr["Cedula"]),
+                            FechaCreacion = Convert.ToDateTime(dr["FechaCreacion"]),
+                            Perfil = Convert.ToString(dr["Perfil"]),
+                        });
+                }
+
+                return lista;
+
             }
         }
         #endregion

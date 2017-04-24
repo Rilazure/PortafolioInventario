@@ -1,7 +1,9 @@
 ﻿using CapaDeDatos;
 using CapaNegociosC;
+using Entidades;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -12,8 +14,36 @@ namespace InventarioWeb
     public partial class PruebaVista : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
-        {            
-            ClaseNegocios Nego = new ClaseNegocios();
+        {
+            CapaConexion Cx = new CapaConexion();
+            var Usuario =  Cx.ListarUsuario();
+            Response.Write(Usuario);
+
+            foreach (var U in Usuario  )
+            {
+                if (U.Fk_Perfil != (Convert.ToInt32(Session["Perfil"])))
+                {
+                    var Rol = ConfigurationManager.AppSettings["UsuarioIncorrecto"];
+                    Response.Redirect(Rol);
+                }
+            }
+
+
+            //if (Perfil.usuarios != PerfilRol)
+            //{
+            //    var rol = ConfigurationManager.AppSettings["Usuario"];
+            //    Response.Redirect(rol);
+
+            //}
+
+
+            if (Convert.ToInt32(Session["Perfil"]) != 2)
+            {
+                var rol = ConfigurationManager.AppSettings["Usuario"];
+                Response.Redirect(rol);
+            }
+
+                ClaseNegocios Nego = new ClaseNegocios();
             if (!IsPostBack)
             {
                 Gv_Datos.DataSource = Nego.Infos();

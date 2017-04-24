@@ -3,3 +3,5 @@ C:\Users\Ricar\Source\Repos\PortafolioInventario\InventarioWeb\CapaDeDatos\bin\D
 C:\Users\Ricar\Source\Repos\PortafolioInventario\InventarioWeb\CapaDeDatos\obj\Debug\CapaDeDatos.csprojResolveAssemblyReference.cache
 C:\Users\Ricar\Source\Repos\PortafolioInventario\InventarioWeb\CapaDeDatos\obj\Debug\CapaDeDatos.dll
 C:\Users\Ricar\Source\Repos\PortafolioInventario\InventarioWeb\CapaDeDatos\obj\Debug\CapaDeDatos.pdb
+C:\Users\Ricar\Source\Repos\PortafolioInventario\InventarioWeb\CapaDeDatos\bin\Debug\Entidades.dll
+C:\Users\Ricar\Source\Repos\PortafolioInventario\InventarioWeb\CapaDeDatos\bin\Debug\Entidades.pdb

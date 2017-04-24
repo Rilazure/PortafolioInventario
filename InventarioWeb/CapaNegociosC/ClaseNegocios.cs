@@ -6,16 +6,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace CapaNegociosC
 {
     public class ClaseNegocios
     {
         
         public string mensaje { get; set; }
-        public int Valor { get; set; }
+        public string Valor { get; set; }
         CapaConexion Cx = new CapaConexion();
         #region Metodo Lectura datos        
-        public DataSet ObtenerMenu(int perfil)
+        //public List<UsuariosE> ListarUsuario()
+        //{
+        //    return 
+        //}
+
+
+        public DataSet ObtenerMenu(string perfil)
         {            
             return Cx.ObtenerMenu(perfil);
         }
@@ -34,7 +41,7 @@ namespace CapaNegociosC
             Cx.CrearUsuario(NombreUsuario, PasswordU,Cedula,Fk_Perfil);
             return  mensaje = Cx.Mensaje;
         }
-        public int VerificarLogin( string Usuario, string PassWordU)
+        public string VerificarLogin( string Usuario, string PassWordU)
         {
              Cx.VerificarLogin(Usuario, PassWordU);
             return Valor = Cx.Valor;

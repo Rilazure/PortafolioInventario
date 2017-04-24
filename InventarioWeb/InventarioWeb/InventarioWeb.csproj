@@ -154,6 +154,10 @@
       <Project>{ec0e31a7-7eef-4d93-a205-7c09c0517f21}</Project>
       <Name>CapaNegociosC</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Entidades\Entidades.csproj">
+      <Project>{77F49CCC-BFBE-4072-9FAF-91A25A9F8157}</Project>
+      <Name>Entidades</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -30,9 +30,11 @@
             <Control:menu runat="server" id="menu" />
         <asp:UpdatePanel runat="server">
             <ContentTemplate>
-                    <asp:Button CssClass="btn btn-primary btn-lg active" ID="Registro" Text="Registrar Nuevo Almacenista" runat="server" OnClick="Registro_Click"  />                
+                <asp:Label ID="LblDato" runat="server"></asp:Label>
+                <asp:Button ID="BtnLista" runat="server" text="Listar" OnClick="BtnLista_Click" />    
+                <asp:Button CssClass="btn btn-primary btn-lg active" ID="Registro" Text="Registrar Nuevo Almacenista" runat="server" OnClick="Registro_Click"  />                
                  <asp:Button CssClass="btn btn-primary btn-lg active" ID="Consulta" Text="Consultar Almacenista Creado" runat="server" OnClick="Consulta_Click" />               
-            <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+            <asp:Label ID="Label1" runat="server" ></asp:Label>
                 <asp:Panel runat="server"  ID="PnlRegistro">
                     <div class="form-horizontal" runat="server">
                         <div class="form-group">

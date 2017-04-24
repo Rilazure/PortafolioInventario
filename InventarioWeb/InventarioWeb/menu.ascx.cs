@@ -22,9 +22,9 @@ namespace InventarioWeb
         }
         public void ObtenerMenu()
         {
-            Cn.ObtenerMenu(Convert.ToInt32(LabelPerfil.Text));
+            Cn.ObtenerMenu(LabelPerfil.Text);
             DataSet dt = new DataSet();
-            dt = Cn.ObtenerMenu(Convert.ToInt32(LabelPerfil.Text));
+            dt = Cn.ObtenerMenu((LabelPerfil.Text));
             dt.Relations.Add("ChildRows", dt.Tables[0].Columns["Id"], dt.Tables[1].Columns["ParentId"]);
             foreach (DataRow level1Dato in dt.Tables[0].Rows)
             {

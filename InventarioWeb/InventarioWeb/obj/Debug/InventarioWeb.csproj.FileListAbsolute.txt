@@ -36,3 +36,5 @@ C:\Users\Ricar\Source\Repos\PortafolioInventario\InventarioWeb\InventarioWeb\bin
 C:\Users\Ricar\Source\Repos\PortafolioInventario\InventarioWeb\InventarioWeb\bin\CapaDeDatos.dll
 C:\Users\Ricar\Source\Repos\PortafolioInventario\InventarioWeb\InventarioWeb\bin\CapaNegociosC.pdb
 C:\Users\Ricar\Source\Repos\PortafolioInventario\InventarioWeb\InventarioWeb\bin\CapaDeDatos.pdb
+C:\Users\Ricar\Source\Repos\PortafolioInventario\InventarioWeb\InventarioWeb\bin\Entidades.dll
+C:\Users\Ricar\Source\Repos\PortafolioInventario\InventarioWeb\InventarioWeb\bin\Entidades.pdb

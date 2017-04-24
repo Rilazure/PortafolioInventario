@@ -5,3 +5,5 @@ C:\Users\Ricar\Source\Repos\PortafolioInventario\InventarioWeb\CapaNegociosC\bin
 C:\Users\Ricar\Source\Repos\PortafolioInventario\InventarioWeb\CapaNegociosC\obj\Debug\CapaNegociosC.csprojResolveAssemblyReference.cache
 C:\Users\Ricar\Source\Repos\PortafolioInventario\InventarioWeb\CapaNegociosC\obj\Debug\CapaNegociosC.dll
 C:\Users\Ricar\Source\Repos\PortafolioInventario\InventarioWeb\CapaNegociosC\obj\Debug\CapaNegociosC.pdb
+C:\Users\Ricar\Source\Repos\PortafolioInventario\InventarioWeb\CapaNegociosC\bin\Debug\Entidades.dll
+C:\Users\Ricar\Source\Repos\PortafolioInventario\InventarioWeb\CapaNegociosC\bin\Debug\Entidades.pdb

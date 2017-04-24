@@ -22,24 +22,14 @@ namespace InventarioWeb
             }
         }
         protected void BtnGuardar_Click(object sender, EventArgs e)
-        {
-
-            
-            //if (FormsAuthentication.Authenticate(TxtNombre.Text, TxtPassword.Text))
-            //{
-            //    FormsAuthentication.RedirectFromLoginPage(TxtNombre.Text, CheckRicar.Checked);
-            //}
-            //else
-            //{
-            //    Mensajes.Text = "Invalido";
-            //}
-
+        {            
             Authenticate(TxtNombre.Text,  TxtPassword.Text);
-            if (Cn.Valor != 0)
+            if (Cn.Valor != "no")
             {
                 FormsAuthentication.RedirectFromLoginPage
                   (TxtNombre.Text, false);
                 Session.Add("Perfil", Cn.Valor);
+
 
                 //Response.Redirect("~/Default.aspx");
                 //Response.Write(ViewState["Prueba"]);
@@ -47,10 +37,10 @@ namespace InventarioWeb
             }
             else
             {
-                Response.Write("no");
+                Response.Write("No");
             }
         }
-        public int Authenticate(string nombre,string Pass)
+        public string Authenticate(string nombre,string Pass)
         {
             Cn.VerificarLogin(nombre, Pass);
             return  Cn.Valor;

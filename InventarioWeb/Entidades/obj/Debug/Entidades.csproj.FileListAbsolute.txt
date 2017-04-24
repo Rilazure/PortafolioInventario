@@ -1,0 +1,5 @@
+C:\Users\Ricar\Source\Repos\PortafolioInventario\InventarioWeb\Entidades\bin\Debug\Entidades.dll
+C:\Users\Ricar\Source\Repos\PortafolioInventario\InventarioWeb\Entidades\bin\Debug\Entidades.pdb
+C:\Users\Ricar\Source\Repos\PortafolioInventario\InventarioWeb\Entidades\obj\Debug\Entidades.csprojResolveAssemblyReference.cache
+C:\Users\Ricar\Source\Repos\PortafolioInventario\InventarioWeb\Entidades\obj\Debug\Entidades.dll
+C:\Users\Ricar\Source\Repos\PortafolioInventario\InventarioWeb\Entidades\obj\Debug\Entidades.pdb
