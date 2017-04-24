@@ -32,6 +32,7 @@
             <ContentTemplate>
                     <asp:Button CssClass="btn btn-primary btn-lg active" ID="Registro" Text="Registrar Nuevo Almacenista" runat="server" OnClick="Registro_Click"  />                
                  <asp:Button CssClass="btn btn-primary btn-lg active" ID="Consulta" Text="Consultar Almacenista Creado" runat="server" OnClick="Consulta_Click" />               
+            <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
                 <asp:Panel runat="server"  ID="PnlRegistro">
                     <div class="form-horizontal" runat="server">
                         <div class="form-group">
@@ -55,6 +56,7 @@
                     <asp:Label runat="server" CssClass="alert alert-danger" ID="lblEx"></asp:Label>
                         </div>
                 </asp:Panel>
+                    
                 <asp:Panel ID="PnlConsultarAlmacenista" runat="server">                  
                     <div class="form-horizontal" runat="server">
                         <div class="input-group col-md-4">

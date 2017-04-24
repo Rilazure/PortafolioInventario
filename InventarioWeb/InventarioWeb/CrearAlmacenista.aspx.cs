@@ -1,6 +1,7 @@
 ﻿using CapaNegociosC;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Web;
@@ -15,6 +16,14 @@ namespace InventarioWeb
         ClaseNegocios Cn = new ClaseNegocios();
         protected void Page_Load(object sender, EventArgs e)
         {
+            int sesion = Convert.ToInt32(Session["Perfil"]);
+            if(sesion != 2)
+            {
+                var rol = ConfigurationSettings.AppSettings["Administrador"];
+                Label1.Text = rol;
+                
+                Response.Redirect("Default.aspx");
+             }
             if (!IsPostBack)
             {
 

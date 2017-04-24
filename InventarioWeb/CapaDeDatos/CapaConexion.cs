@@ -84,7 +84,7 @@ namespace CapaDeDatos
                 cmd.Parameters.AddWithValue("@PassWordU", PasswordEncriptado);
                 cmd.Parameters.AddWithValue("@Nombre", usuario);
                 Valor = (int)cmd.ExecuteScalar();
-                if (Valor !=0 )
+                 if (Valor !=0 )
                 {
                   
                     return Valor;
