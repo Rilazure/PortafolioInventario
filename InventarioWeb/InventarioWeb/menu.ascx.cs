@@ -41,6 +41,7 @@ namespace InventarioWeb
                 }
                 Menu1.Items.Add(item);
             }
+            //ok el SP porfin 
         }        
     }
 }
