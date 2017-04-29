@@ -33,68 +33,80 @@ namespace CapaDeDatos
         public string Mensaje { get; set; }
         public string Referencia { get; set; }
         public string Valor { get; set; }
+        public int Columna { get; set; }
         #endregion
+
+        //Prueba conexion base de datos con metodo conexion
+        private SqlConnection cx;
+        private void Conexion()
+        {
+            string cadena = ConfigurationManager.ConnectionStrings["DBZ"].ConnectionString;
+            cx = new SqlConnection(cadena);
+        }
+
+
+
+
         #region Conexion Base de datos
-        string Conexion = ConfigurationManager.ConnectionStrings["DBZ"].ConnectionString;
+        //string Conexion = ConfigurationManager.ConnectionStrings["DBZ"].ConnectionString;
 
         #endregion
         #region Insertar Datos
         //Este metodo es para el Login seguridad.
-        public string CrearUsuario(string Nombre, string PasswordU,int Cedula,int Fk_Perfil)
+        public string CrearUsuario(string Nombre, string PasswordU, int Cedula, int Fk_Perfil)
         {
-            using (SqlConnection cx = new SqlConnection(Conexion))
+
+            Conexion();
+            try
             {
-                try
+                SqlCommand cmd = new SqlCommand("SpNewUsers", cx);
+                cmd.CommandType = CommandType.StoredProcedure;
+                //SqlDataAdapter da = new SqlDataAdapter("Select * from Login where @NombreUsuario", NombreUsuario);
+                string PasswordEncriptado = FormsAuthentication.HashPasswordForStoringInConfigFile(PasswordU, "SHA1");
+                cx.Open();
+                cmd.Parameters.AddWithValue("@Nombre", Nombre);
+                cmd.Parameters.AddWithValue("@PassWordU", PasswordEncriptado);
+                cmd.Parameters.AddWithValue("@Cedula", Cedula);
+                cmd.Parameters.AddWithValue("@Fk_Perfil", Fk_Perfil);
+                cmd.Parameters.AddWithValue("@FechaCreacion", DateTime.Now);
+                Retorna = (int)cmd.ExecuteScalar();
+                cmd.ExecuteNonQuery();
+                if (Retorna == -1)
                 {
-                    SqlCommand cmd = new SqlCommand("SpNewUsers", cx);
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    //SqlDataAdapter da = new SqlDataAdapter("Select * from Login where @NombreUsuario", NombreUsuario);
-                    string PasswordEncriptado = FormsAuthentication.HashPasswordForStoringInConfigFile(PasswordU, "SHA1");
-                    cx.Open();
-                    cmd.Parameters.AddWithValue("@Nombre", Nombre);
-                    cmd.Parameters.AddWithValue("@PassWordU", PasswordEncriptado);
-                    cmd.Parameters.AddWithValue("@Cedula", Cedula);
-                    cmd.Parameters.AddWithValue("@Fk_Perfil", Fk_Perfil);
-                    cmd.Parameters.AddWithValue("@FechaCreacion", DateTime.Now);
-                    Retorna = (int)cmd.ExecuteScalar();
-                    cmd.ExecuteNonQuery();
-                    if (Retorna == -1)
-                    {
-                        return Mensaje = "Ya existe";
-                    }
-                    else
-                    {
-                        return Mensaje = "";
-                    }
+                    return Mensaje = "Ya existe";
                 }
-                catch (Exception ex)
+                else
                 {
-                    throw ex;
+                    return Mensaje = "";
                 }
             }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
         }
         //aqui creo q puedo hacer poliformismo o sobre carga de metodos
         public string VerificarLogin(string usuario, string PasswordU)
         {
-            using (SqlConnection cx = new SqlConnection(Conexion))
+            Conexion();
+            SqlCommand cmd = new SqlCommand("SpLoginIngreso", cx);
+            cmd.CommandType = CommandType.StoredProcedure;
+            string PasswordEncriptado = FormsAuthentication.HashPasswordForStoringInConfigFile(PasswordU, "SHA1");
+            cx.Open();
+            cmd.Parameters.AddWithValue("@PassWordU", PasswordEncriptado);
+            cmd.Parameters.AddWithValue("@Nombre", usuario);
+            Valor = Convert.ToString(cmd.ExecuteScalar());
+            if (Valor != "no")
             {
-                SqlCommand cmd = new SqlCommand("SpLoginIngreso", cx);
-                cmd.CommandType = CommandType.StoredProcedure;
-                string PasswordEncriptado = FormsAuthentication.HashPasswordForStoringInConfigFile(PasswordU, "SHA1");
-                cx.Open();
-                cmd.Parameters.AddWithValue("@PassWordU", PasswordEncriptado);
-                cmd.Parameters.AddWithValue("@Nombre", usuario);
-                Valor = Convert.ToString( cmd.ExecuteScalar());
-                 if (Valor !="no" )
-                {
-                  
-                    return Valor;
-                }
-                else
-                {
-                    return Valor = "No";
-                }                                                
+
+                return Valor;
             }
+            else
+            {
+                return Valor = "No";
+            }
+
         }
         public void CrearAlmacenista(string Nombre, int Cedula)
         {
@@ -188,33 +200,26 @@ namespace CapaDeDatos
         //Estos datos son para llenar DropDownList
         public DataSet ObtenerMenu(string perfil)
         {
-            using (SqlConnection cx = new SqlConnection(Conexion))
-            {
-                SqlCommand cmd = new SqlCommand("spObtenerMenu", cx);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cx.Open();
-                cmd.Parameters.AddWithValue("@Perfil", perfil);
-                cmd.ExecuteNonQuery();
-
-                    SqlDataAdapter Da = new SqlDataAdapter(cmd);
-                DataSet dt = new DataSet();
-                Da.Fill(dt);
-               
-                return dt;
-
-            }
+            Conexion();
+            SqlCommand cmd = new SqlCommand("spObtenerMenu", cx);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cx.Open();
+            cmd.Parameters.AddWithValue("@Perfil", perfil);
+            cmd.ExecuteNonQuery();
+            SqlDataAdapter Da = new SqlDataAdapter(cmd);
+            DataSet dt = new DataSet();
+            Da.Fill(dt);
+            return dt;
         }
         public DataTable Info()
         {
-            using (SqlConnection cx = new SqlConnection(Conexion))
-            {
+            Conexion();
                 //COn esta consulta puedo llenar los drl    
                 SqlDataAdapter DA = new SqlDataAdapter("select IdEstado,Estado,IdDispo,Diponibilidad,IdCategoria,Categoria from Estado E join Disponibilidad D on E.IdEstado = D.IdDispo join Categoria C  on E.IdEstado = C.IdCategoria", cx);
                 DataSet dt = new DataSet();
                 DA.Fill(dt);
                 Cantidad = dt.Tables[0].Rows.Count;
-                return dt.Tables[0];
-            }
+                return dt.Tables[0];            
         }
         //Este metodo servira para el ddl cuando necesite el nombre del almacenista
         public DataTable ConsultaAlmacenista(int Cedula)
@@ -234,10 +239,10 @@ namespace CapaDeDatos
 
         public List<UsuariosE> ListarUsuario()
         {
-            using (SqlConnection cx = new SqlConnection(Conexion))
-            {
+            Conexion();
+            
                 List<UsuariosE> lista = new List<UsuariosE>();
-                SqlCommand cmd = new SqlCommand("select IdUsuarios,Nombre,Cedula,FechaCreacion,Perfil  from  Usuarios U join Perfil P on U.IdUsuarios = P.IdPerfil",cx);
+                SqlCommand cmd = new SqlCommand("select IdUsuarios,Nombre,Cedula,FechaCreacion,Perfil  from  Usuarios U join Perfil P on U.IdUsuarios = P.IdPerfil", cx);
                 SqlDataAdapter Da = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 cx.Open();
@@ -254,11 +259,22 @@ namespace CapaDeDatos
                             Perfil = Convert.ToString(dr["Perfil"]),
                         });
                 }
-
                 return lista;
-
-            }
         }
+        public DataTable DatoColumna()
+        {
+            Conexion();
+            
+                //COn esta consulta puedo llenar los drl    
+                SqlDataAdapter DA = new SqlDataAdapter("select top 1 IdUsuarios from Usuarios order by IdUsuarios desc", cx);
+                DataSet dt = new DataSet();
+                DA.Fill(dt);
+                DataRow row = dt.Tables[0].Rows[0];
+                Columna = Convert.ToInt32(row["IdUsuarios"]);
+                return dt.Tables[0];
+           
+        }
+
         #endregion
         #region Datos Importantes para los drl Items.Insert(0,"-Seleccione-")
         #endregion

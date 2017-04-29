@@ -11,7 +11,7 @@ namespace CapaNegociosC
 {
     public class ClaseNegocios
     {
-        
+        public int Columna { get; set; }
         public string mensaje { get; set; }
         public string Valor { get; set; }
         CapaConexion Cx = new CapaConexion();
@@ -29,6 +29,13 @@ namespace CapaNegociosC
         public DataTable Infos()
         {
             return Cx.Info();
+        }
+        public int DatoColumna()
+        {
+            Cx.DatoColumna();
+          Columna = Cx.Columna;
+            return Columna;
+            
         }
         public DataTable ConsultaAlmacenista(int Cedula)
         {
