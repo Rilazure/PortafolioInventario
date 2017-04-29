@@ -1,4 +1,5 @@
 ﻿using CapaDeDatos;
+using Entidades;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -23,7 +24,7 @@ namespace CapaNegociosC
 
 
         public DataSet ObtenerMenu(string perfil)
-        {            
+        {
             return Cx.ObtenerMenu(perfil);
         }
         public DataTable Infos()
@@ -33,9 +34,9 @@ namespace CapaNegociosC
         public int DatoColumna()
         {
             Cx.DatoColumna();
-          Columna = Cx.Columna;
+            Columna = Cx.Columna;
             return Columna;
-            
+
         }
         public DataTable ConsultaAlmacenista(int Cedula)
         {
@@ -43,18 +44,16 @@ namespace CapaNegociosC
         }
         #endregion
         #region Metodos ingreso datos        
-        public string CrearUsuario(string NombreUsuario,string PasswordU,int Cedula,int Fk_Perfil)
+        public string CrearUsuario(string NombreUsuario, string PasswordU, int Cedula, int Fk_Perfil)
         {
-            Cx.CrearUsuario(NombreUsuario, PasswordU,Cedula,Fk_Perfil);
-            return  mensaje = Cx.Mensaje;
+            Cx.CrearUsuario(NombreUsuario, PasswordU, Cedula, Fk_Perfil);
+            return mensaje = Cx.Mensaje;
         }
-        public string VerificarLogin( string Usuario, string PassWordU)
+        public string VerificarLogin(string Usuario, string PassWordU)
         {
-             Cx.VerificarLogin(Usuario, PassWordU);
+            Cx.VerificarLogin(Usuario, PassWordU);
             return Valor = Cx.Valor;
         }
-
-
         public void CrearAlmcenista(string Nombre, int Cedula)
         {
             Cx.CrearAlmacenista(Nombre, Cedula);
@@ -69,16 +68,17 @@ namespace CapaNegociosC
         }
         public void CrearPrestamo(int fk_Almacenista, int fk_Solicitante, int fk_IngresoArticulo, int fk_Estado, int fk_Disponibilidad, int fk_Categoria, DateTime fechaPrestamo)
         {
-            Cx.CrearPrestamo(fk_Almacenista, fk_Solicitante, fk_IngresoArticulo, fk_Estado, fk_Disponibilidad, fk_Categoria,fechaPrestamo);
+            Cx.CrearPrestamo(fk_Almacenista, fk_Solicitante, fk_IngresoArticulo, fk_Estado, fk_Disponibilidad, fk_Categoria, fechaPrestamo);
         }
         public void ActualizarPrestamo(int IdPrestamo, int fk_Almacenista, int fk_Solicitante, int fk_IngresoArticulo, int fk_Estado, int fk_Disponibilidad, int fk_Categoria, DateTime fechaDevolucion)
         {
-            Cx.ActualizarPrestamo(IdPrestamo,fk_Almacenista,fk_Solicitante,fk_IngresoArticulo,fk_Estado,fk_Disponibilidad,fk_Categoria,fechaDevolucion);
+            Cx.ActualizarPrestamo(IdPrestamo, fk_Almacenista, fk_Solicitante, fk_IngresoArticulo, fk_Estado, fk_Disponibilidad, fk_Categoria, fechaDevolucion);
         }
         public void AtualizarHistorial(DateTime FechaGestion, string Observaciones, int fk_Prestamo)
         {
             Cx.ActualizarHistorial(FechaGestion, Observaciones, fk_Prestamo);
         }
-        #endregion       
+     
+        #endregion
     }
 }

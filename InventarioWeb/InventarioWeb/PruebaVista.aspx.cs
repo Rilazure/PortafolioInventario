@@ -15,6 +15,7 @@ namespace InventarioWeb
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            
             CapaConexion Cx = new CapaConexion();
             var Usuario =  Cx.ListarUsuario();
             Response.Write(Usuario);
@@ -46,6 +47,10 @@ namespace InventarioWeb
                 ClaseNegocios Nego = new ClaseNegocios();
             if (!IsPostBack)
             {
+
+
+
+
                 Gv_Datos.DataSource = Nego.Infos();
                 Gv_Datos.DataBind();
 

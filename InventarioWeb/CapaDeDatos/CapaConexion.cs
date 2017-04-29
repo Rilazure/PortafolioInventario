@@ -110,44 +110,41 @@ namespace CapaDeDatos
         }
         public void CrearAlmacenista(string Nombre, int Cedula)
         {
-            using (SqlConnection cx = new SqlConnection(Conexion))
-            {
+            Conexion();
+            
                 SqlCommand cmd = new SqlCommand("insert into Almacenista values (@Nombre,@Cedula,@FechaCreacion)", cx);
                 cx.Open();
                 cmd.Parameters.AddWithValue("@Nombre", Nombre);
                 cmd.Parameters.AddWithValue("@Cedula", Cedula);
                 cmd.Parameters.AddWithValue("@FechaCreacion", DateTime.Now);
-                cmd.ExecuteNonQuery();
-            }
+                cmd.ExecuteNonQuery();            
         }
         public void IngresarArticulo(DateTime FechaIngreso, int Fk_Almacenista, string NombreA)
         {
-            using (SqlConnection Cx = new SqlConnection(Conexion))
-            {
+            Conexion();            
                 SqlCommand cmd = new SqlCommand("INSERT INTO IngresoArticulo values @fechaIngreso,@Fk_Almacenista,@NombreA,@Referencia");
-                Cx.Open();
+                cx.Open();
                 cmd.Parameters.AddWithValue("@fechaIngreso", FechaIngreso);
                 cmd.Parameters.AddWithValue("@Fk_Almacenista", Fk_Almacenista);
                 cmd.Parameters.AddWithValue("@NombreA", NombreA);
                 cmd.Parameters.AddWithValue("@Referencia", Referencia);
                 cmd.ExecuteNonQuery();
-            }
+            
         }
         public void CrearPersonaSolicitante(string Nombre, int Cedula)
         {
-            using (SqlConnection cx = new SqlConnection(Conexion))
-            {
+            Conexion();
+            
                 SqlCommand cmd = new SqlCommand("INSERT INTO Solicitante VALUES @Nombre,@Cedula");
                 cx.Open();
                 cmd.Parameters.AddWithValue("@Nombre", Nombre);
                 cmd.Parameters.AddWithValue("@Cedula", Cedula);
                 cmd.ExecuteNonQuery();
-            }
+            
         }
         public void CrearPrestamo(int fk_Almacenista, int fk_Solicitante, int fk_IngresoArticulo, int fk_Estado, int fk_Disponibilidad, int fk_Categoria, DateTime fechaPrestamo)
         {
-            using (SqlConnection cx = new SqlConnection(Conexion))
-            {
+            Conexion();            
                 SqlCommand cmd = new SqlCommand("Insert into Prestamo (Fk_Almacenista,Fk_Solicitante,Fk_IngresoArticulo,Fk_Estado,Fk_Disponibilidad,Fk_Categoria,FechaPrestamo) values @Fk_Almacenista,@Fk_Solicitante,@Fk_IngresoArticulo,@Fk_Estado,@Fk_Disponibilidad,@Fk_Categoria,@FechaPrestamo");
                 cx.Open();
                 cmd.Parameters.AddWithValue("@Fk_Almacenista", fk_Almacenista);
@@ -157,13 +154,12 @@ namespace CapaDeDatos
                 cmd.Parameters.AddWithValue("@Fk_Disponibilidad", fk_Disponibilidad);
                 cmd.Parameters.AddWithValue("@Fk_Categoria", fk_Categoria);
                 cmd.Parameters.AddWithValue("@FechaPrestamo", fechaPrestamo);
-                cmd.ExecuteNonQuery();
-            }
+                cmd.ExecuteNonQuery();            
         }
         public void ActualizarPrestamo(int IdPrestamo, int fk_Almacenista, int fk_Solicitante, int fk_IngresoArticulo, int fk_Estado, int fk_Disponibilidad, int fk_Categoria, DateTime fechaDevolucion)
         {
-            using (SqlConnection cx = new SqlConnection(Conexion))
-            {
+            Conexion();
+            
                 SqlCommand cmd = new SqlCommand("Update Prestamo set Fk_Estado = @Fk_Estado,Fk_Disponibilidad = @Fk_Disponibilidad,fechaDevolucion = @fechaDevolucion where IdPrestamo = @IdPrestamo ");
                 cx.Open();
                 cmd.Parameters.AddWithValue("@Fk_Estado", fk_Estado);
@@ -172,19 +168,17 @@ namespace CapaDeDatos
                 cmd.Parameters.AddWithValue("@Fk_Disponibilidad", fk_Disponibilidad);
                 cmd.Parameters.AddWithValue("@FechaDevolucion", fechaDevolucion);
                 cmd.Parameters.AddWithValue("@IdPrestamo", IdPrestamo);
-                cmd.ExecuteNonQuery();
-            }
+                cmd.ExecuteNonQuery();            
         }
         public void ActualizarHistorial(DateTime FechaGestion, string Observaciones, int fk_Prestamo)
         {
-            using (SqlConnection cx = new SqlConnection(Conexion))
-            {
+            Conexion();
+            
                 SqlCommand cmd = new SqlCommand("Insert into HistorialArticulo values @FechaGestion,@Observaciones,@Fk_Prestamo");
                 cx.Open();
                 cmd.Parameters.AddWithValue("@FechaGestion", FechaGestion);
                 cmd.Parameters.AddWithValue("@Observaciones", Observaciones);
-                cmd.Parameters.AddWithValue("@Fk_Prestamo", fk_Prestamo);
-            }
+                cmd.Parameters.AddWithValue("@Fk_Prestamo", fk_Prestamo);            
         }
         #endregion
         #region Obtener Datos
@@ -224,8 +218,8 @@ namespace CapaDeDatos
         //Este metodo servira para el ddl cuando necesite el nombre del almacenista
         public DataTable ConsultaAlmacenista(int Cedula)
         {
-            using (SqlConnection cx = new SqlConnection(Conexion))
-            {
+            Conexion();
+            
                 SqlCommand cmd = new SqlCommand("select Nombre,Cedula,FechaCreacion as [Fecha de Ingreso] from  Almacenista where Cedula = @Cedula", cx);
                 cx.Open();
                 cmd.Parameters.AddWithValue("@Cedula", Cedula);
@@ -233,8 +227,7 @@ namespace CapaDeDatos
                 SqlDataAdapter Da = new SqlDataAdapter(cmd);
                 DataSet dt = new DataSet();
                 Da.Fill(dt);
-                return dt.Tables[0];
-            }
+                return dt.Tables[0];            
         }
 
         public List<UsuariosE> ListarUsuario()
